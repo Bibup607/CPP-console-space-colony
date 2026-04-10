@@ -6,10 +6,48 @@
 SpaceColony spaceColony;
 
 void startGame::mainMenu() {
-    std::cout << "\n--- " << spaceColony.getName() << " | Ход: " << motion << " ---\n";
-    std::cout << "Энергия: " << spaceColony.getEnergy() << " | Еда: " << spaceColony.getFood() << " | Люди: " << spaceColony.getPeople() << "\n";
-    std::cout << "1. След. ход | 2. Инфо | 3. Древо | 4. Пир | 5. Магазин | 6. Настройки | 0. Выход\n-> ";
-    int action; std::cin >> action;
+    int action;
+    std::cout << "======= Колония: " << spaceColony.getName()
+    << " | Уровень: " << spaceColony.getLVL() << " | Ход: " << motion
+    << " =======" << std::endl;
+    std::cout << "-------- Ресурсы --------" << std::endl;
+    std::cout << "Еда:         "  << spaceColony.getFood()   << std::endl;
+    std::cout << "Вода:        "  << spaceColony.getWater()  << std::endl;
+    std::cout << "Воздух:      "  << spaceColony.getOxygen() << std::endl;
+    std::cout << "Энергия:     "  << spaceColony.getEnergy() << std::endl;
+    std::cout << "Население:   "  << spaceColony.getPeople() << std::endl;
+    std::cout << "Настроение:  "  << spaceColony.getMood() << std::endl;
+    std::cout << "-------------------------" << std::endl;
+
+    std::cout << "\n============== Ваши постройки ==============" << std::endl;
+    if (spaceColony.getBuildings().empty()) {
+        std::cout << "У вас пока ничего не построено." << std::endl;
+    }
+    else {
+        for (const auto& b : spaceColony.getBuildings()) {
+            std::cout << "• " << b.name << std::endl;
+        }
+    }
+
+            std::cout << " \n=== Ваши действия === "   << std::endl;
+            std::cout << " 1. Следующий ход"           << std::endl;
+            std::cout << " 2. Подробная информация: "  << std::endl;
+            std::cout << " 3. Древо улучшений"         << std::endl;
+            std::cout << " 4. Устроить пир   "         << std::endl;
+            std::cout << " 5. Магазин "                << std::endl;
+            std::cout << " 6. Настройки "              << std::endl;
+            std::cout << " 0. Выход из игры"           << std::endl;
+            std::cout << "→  ";
+            std::cin >> action;
+
+            while (action < 0 || action > 6) {
+                std::cout << "Введите число 0-6: " << std::endl;
+                std::cin >> action;
+            }
+    if (action == 0) {
+        std::cout << "Выход из системы... До встречи, капитан!" << std::endl;
+        spaceColony.stopGame();;
+    }
 
     if (action == 1) {
         motion++;
