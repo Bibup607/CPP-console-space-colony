@@ -30,7 +30,7 @@ void startGame::mainMenu() {
 
             std::cout << " \n=== Ваши действия === "   << std::endl;
             std::cout << " 1. Следующий ход"           << std::endl;
-            std::cout << " 2. Подробная информация: "  << std::endl;
+            std::cout << " 2. Подробная информация "  << std::endl;
             std::cout << " 3. Древо улучшений"         << std::endl;
             std::cout << " 4. Устроить пир   "         << std::endl;
             std::cout << " 5. Магазин "                << std::endl;
