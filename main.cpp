@@ -2,8 +2,7 @@
 #include "StartGame.h"
 #include <ctime>
 
-// Определение глобального объекта
-SpaceColony spaceColony;
+TechStudy techStudy;
 
 void startGame::mainMenu() {
     int action;
