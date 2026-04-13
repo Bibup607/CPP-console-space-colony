@@ -2,7 +2,8 @@
 #include <ctime>
 
 void gameMotion::randMotion() {
-    rand_event = arr_event[rand() % arr_event.size()];
+    int rand_event = rand() % 4 + 1;
+
 
                 if (rand_event == 1) {
                     spaceColony.addE(10);
@@ -14,7 +15,7 @@ void gameMotion::randMotion() {
                     std::cout << "За этот ход ничего не произошло\n" << std::endl;
                 }
                 else if (rand_event == 2) {
-                    rand_people1 = 1 + rand() % 20;   // исправлено
+                    rand_people1 = 1 + rand() % 20;
                     spaceColony.addP(-rand_people1);
                     std::cout << " Метеориты!! У вас погибло: "<< rand_people1 << " человек :(" << std::endl;
                     std::cout << "Повреждена Солнечная батарея! -20 энергии\n" << std::endl;
@@ -577,7 +578,6 @@ else {
 #include "SpaceColony.h"
 #include "GameLogic.h"
 
-SpaceColony spaceColony; // Определение глобального объекта
 
 class startGame {
     gameMotion gMotion;
@@ -628,13 +628,3 @@ public:
         else if (action == 0) spaceColony.stopGame();
     }
 };
-
-int main() {
-    setlocale(LC_ALL, "RU");
-    srand(time(NULL));
-    startGame game;
-    while (spaceColony.getIsAlive()) {
-        game.mainMenu();
-    }
-    return 0;
-}
