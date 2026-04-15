@@ -21,7 +21,7 @@ extern TechStudy techStudy;
 class gameMotion {
 public:
     void randMotion();
-    int rand_people1 = 0, rand_people2 = 0, rand_people3 = 0, rand_breakdown = 0;
+    int rand_people1 = 0, rand_people2 = 0, rand_people3 = 0, rand_breakdown = 0, rand_event, arr_event;
 };
 
 class treeUp {
@@ -47,7 +47,7 @@ public:
     bool magazv2 = false, magazv3 = false, magazv4 = false;
 
     int countHousing = 0, countHydro = 0, countSolar = 0, countOxy = 0;
-    int countSolar1 = 0, countLab1 = 0;
+    int countSolar1 = 0, countLab1 = 0, countLab = 0;
 
     void magz();
     void magazine();
