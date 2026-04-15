@@ -5,6 +5,7 @@
 
 class startGame {
 private:
+    int lastFeastMotion = -10;
     int motion = 0;
     gameMotion gMotion;
     Magazin magaz;
