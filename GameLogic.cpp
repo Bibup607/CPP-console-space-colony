@@ -2,9 +2,8 @@
 #include <ctime>
 
 void gameMotion::randMotion() {
-    int rand_event = rand() % 4 + 1;
-
-
+    std::vector<int> arr_event = {1, 5, 1, 5, 1, 2, 1, 5, 1, 1, 2, 5, 3, 1, 1, 5, 4, 4, 1,};
+    rand_event = arr_event[rand() % arr_event.size()];
                 if (rand_event == 1) {
                     spaceColony.addE(10);
                     spaceColony.addF(10);
@@ -24,6 +23,7 @@ void gameMotion::randMotion() {
                     spaceColony.addO(10);
                     spaceColony.addE(-20);
                     spaceColony.addR(5);
+                    spaceColony.addM(-3);
                 }
                 else if (rand_event == 3) {
                     rand_people2 = 1 + rand() % 9;
@@ -34,6 +34,7 @@ void gameMotion::randMotion() {
                     spaceColony.addW(10);
                     spaceColony.addO(10);
                     spaceColony.addR(5);
+                    spaceColony.addM(-3);
                 }
                 else if (rand_event == 4) {
 
@@ -50,6 +51,7 @@ void gameMotion::randMotion() {
                         spaceColony.addP(5);
                         spaceColony.addE(-20);
                         spaceColony.addR(-5);
+                        spaceColony.addM(-3);
                     }
                     else if (rand_breakdown == 2) {
                         std::cout << "Поврежден жилой модуль!" << std::endl;
@@ -59,6 +61,7 @@ void gameMotion::randMotion() {
                         spaceColony.addF(10);
                         spaceColony.addW(10);
                         spaceColony.addR(5);
+                        spaceColony.addM(-3);
                         std::cout << "У вас погибло: "<< rand_people2 << " человек :(" << std::endl;
                         std::cout << "Произошла утечка кислорода! Вы потеряли 25 кислорода\n" << std::endl;
                         spaceColony.addO(-25);
@@ -70,6 +73,7 @@ void gameMotion::randMotion() {
                         spaceColony.addW(10);
                         spaceColony.addO(10);
                         spaceColony.addP(5);
+                        spaceColony.addM(-3);
                     }
                     else if (rand_breakdown == 4) {
                         std::cout << "Повреждена гидропонная лаборатория! - 30 еды/воды\n" << std::endl;
@@ -79,6 +83,7 @@ void gameMotion::randMotion() {
                         spaceColony.addO(10);
                         spaceColony.addP(5);
                         spaceColony.addR(5);
+                        spaceColony.addM(-3);
                     }
                 } else if (rand_event == 5) {
                     rand_people3 = rand() % 4 + 1;
@@ -101,10 +106,52 @@ void Magazin::applyTurnBonuses() {
 }
 
 void Magazin::magazine() {
+    int action;
     magz();
     std::cout << "\n=== МАГАЗИН ===\n";
-    int action;
+    std::cout << "Чтобы открывать новые уровни, нужно "
+                     "купить все постройки с прошлого " << std::endl;
+
+        std::cout << "Уровень I (Открыто)" << std::endl;
+        std::cout << "1. Жилой модуль                  — 40 э | +10 населению (единоразово)\n";
+        std::cout << "2. Гидропонная лаборатория       — 60 э | Еда+22, Вода+6\n";
+        std::cout << "3. Солнечная батарея             — 50 э | Энергия+20\n";
+        std::cout << "4. Исследовательская лаборатория — 55 э | Иссл.+6\n\n";
+
+
+        if (magazv2 == false) std::cout << "Уровень II (Закрыто)" << std::endl;
+        else std::cout << "Уровень II (Открыто)" << std::endl;
+        std::cout << "5. Кислородный переработчик      — 80 э | Кисл.+12\n";
+        std::cout << "6. Купол отдыха                  — 120э | +1 население\n";
+        std::cout << "7. Переработчик отходов          — 65 э | +7 к еде\n";
+        std::cout << "8. Жилой модуль II               — 90 э | +4 населению\n";
+        std::cout << "9. Солнечная батарея II          — 85 э | +10 к энергии\n\n";
+
+        if (magazv3 == false) std::cout << "Уровень III (Закрыто)" << std::endl;
+        else std::cout << "Уровень III (Открыто)" << std::endl;
+        std::cout << "10. Горнодобывающий пост         — 110 э | +10 к энергии\n";
+        std::cout << "11. Медицинский отсек            — 155 э | +1 к населению\n";
+        std::cout << "12. Чертеж ракеты                — 420 э | ........ \n";
+        std::cout << "13. Биокупол                     — 130 э | Еда+10/Вода+5\n";
+        std::cout << "14. Центральная лаборатория      — 125 э | Иссл.+30\n\n";
+
+        if (magazv4 == false) std::cout << "Уровень IV (Закрыто)" << std::endl;
+        else std::cout << "Уровень III (Открыто)" << std::endl;
+        std::cout << "15. Ядерный реактор              — 250 э | Энергия +70\n";
+        std::cout << "16. Генетическая лаборатория     — 220 э | +5 к населению.\n";
+        std::cout << "17. Космический док              — 300 э | +3 колониста/15 ходов\n";
+        std::cout << "18. Космическая ракета           — 888 э | ........\n\n";
+
+        std::cout << "0. Назад\n";
+        std::cout << "Напишите 0-18" << std::endl;
+        std::cin >> action;
     std::cin >> action;
+
+    while (action < 0 || action > 18) {
+        std::cout << "Введите число 0-18: " << std::endl;
+        std::cin >> action;
+    }
+
     if (action == 1) {
         if (!isBuy1) {
             std::cout << "[-] Ошибка: Жилой модуль уже построен!" << std::endl;
@@ -436,143 +483,116 @@ void infoBuild::infoB() {
             std::cin >> action;
         }
     }
-void mooDs::upMood(int m) { spaceColony.addM(20); }
+void mooDs::upMood(int amount) {
+    if (spaceColony.getMood() > 100) {
+        spaceColony.setMood(100);
+    }
+    if (spaceColony.getMood() >= 100) {
+        std::cout << "Настроение на максимуме!" << std::endl;
+    }
+    else if (spaceColony.getMood() < 100) {
+        spaceColony.addM(10); // Прибавляем 10
+    }
+}
 void treeUp::researchPoints() { spaceColony.addR(10); }
 void treeUp::tree() {
-    int action;
-        std::cout << "\n==================================================\n";
-        std::cout << "          ДРЕВО ТЕХНОЛОГИЧЕСКОГО РАЗВИТИЯ         \n";
-        std::cout << "==================================================\n\n";
-        std::cout << "Очки исследования: " << spaceColony.getResearch() << std::endl << std::endl;
+    int choice;
+    std::cout << "\n====================================================" << std::endl;
+    std::cout << "          ДРЕВО ТЕХНОЛОГИЙ И УЛУЧШЕНИЙ            " << std::endl;
+    std::cout << "          Доступно исследований: " << spaceColony.getResearch() << std::endl;
+    std::cout << "====================================================" << std::endl;
 
-        // --- УРОВЕНЬ I ---
-        std::cout << "--- УРОВЕНЬ I (Базовый) ---\n";
-        std::cout << "1. Протокол «Общий сбор»        — [30 иссл.]\n";
-        std::cout << "   Эффект: +5 к настроению | Потребление еды +20%\n";
-        std::cout << "2. Система рационирования       — [45 иссл.]\n";
-        std::cout << "   Эффект: Еда -50% | Настроение -2 каждый ход\n";
-        std::cout << "3. Персональные аудио-дневники  — [50 иссл.]\n";
-        std::cout << "   Эффект: Лаборатории дают +2 к настроению (Пассивно)\n\n";
+    // --- УРОВЕНЬ I (Базовый) ---
+    std::cout << "--- УРОВЕНЬ I (Базовый) ---" << std::endl;
+    std::cout << "1. Протокол «Общий сбор»        — [30 иссл.]" << std::endl;
+    std::cout << "   Эффект: +5 к настроению сразу | Потребление еды +20%" << std::endl;
+    std::cout << "2. Система рационирования       — [45 иссл.]" << std::endl;
+    std::cout << "   Эффект: Еда -50% | Настроение -2 каждый ход" << std::endl;
+    std::cout << "3. Персональные аудио-дневники  — [50 иссл.]" << std::endl;
+    std::cout << "   Эффект: Лаборатории дают +2 к настроению (Пассивно)" << std::endl;
 
-        // --- УРОВЕНЬ II ---
-        if (magazv2 == false) std::cout << "--- УРОВЕНЬ II (Закрыто) ---" << std::endl;
-        else std::cout << "--- УРОВЕНЬ II (Открыто) ---" << std::endl;
-        std::cout << "4. Организация Пира             — [80 иссл.]\n";
-        std::cout << "   Эффект: +30 к настроению (Цена: 100 еды, 50 воды)\n";
-        std::cout << "5. Спортивные трансляции        — [100 иссл.]\n";
-        std::cout << "   Эффект: Жилой модуль II дает +2 к настроению\n";
-        std::cout << "6. Ночная смена                 — [120 иссл.]\n";
-        std::cout << "   Эффект: Ресурсы +50% | Шанс поломки +15%\n\n";
+    // --- УРОВЕНЬ II ---
+    std::cout << "\n";
+    if (magazv2 == false) std::cout << "--- УРОВЕНЬ II (Закрыто) ---" << std::endl;
+    else std::cout << "--- УРОВЕНЬ II (Открыто) ---" << std::endl;
 
-        // --- УРОВЕНЬ III ---
-        if (magazv3 == false) std::cout << "--- УРОВЕНЬ III (Закрыто) ---" << std::endl;
-        else std::cout << "--- УРОВЕНЬ III (Открыто) ---" << std::endl;
-        std::cout << "7. Виртуальная реальность       — [200 иссл.]\n";
-        std::cout << "   Эффект: Настроение не падает ниже 40 единиц\n";
-        std::cout << "8. Автоматизированная медицина  — [250 иссл.]\n";
-        std::cout << "   Эффект: Защита населения от гибели в эпидемиях\n\n";
+    std::cout << "4. Организация Пира             — [80 иссл.]" << std::endl;
+    std::cout << "   Эффект: Разблокирует функцию 'Пир' в меню" << std::endl;
+    std::cout << "5. Спортивные трансляции        — [100 иссл.]" << std::endl;
+    std::cout << "   Эффект: Жилой модуль дает +2 к настроению" << std::endl;
+    std::cout << "6. Ночная смена                 — [120 иссл.]" << std::endl;
+    std::cout << "   Эффект: Ресурсы +50% | Шанс поломки +15%" << std::endl;
 
-        // --- УРОВЕНЬ IV ---
-        if (magazv4 == false) std::cout << "--- УРОВЕНЬ IV (Закрыто) ---" << std::endl;
-        else std::cout << "--- УРОВЕНЬ IV (Открыто) ---" << std::endl;
-        std::cout << "9. Межпланетная торговля        — [400 иссл.]\n";
-        std::cout << "   Эффект: Обмен 1 исследования на 2 энергии\n";
-        std::cout << "10. Пропаганда «Путь домой»     — [600 иссл.]\n";
-        std::cout << "    Эффект: Рост добычи от прогресса Ракеты\n";
+    // --- УРОВЕНЬ III ---
+    std::cout << "\n";
+    if (magazv3 == false) std::cout << "--- УРОВЕНЬ III (Закрыто) ---" << std::endl;
+    else std::cout << "--- УРОВЕНЬ III (Открыто) ---" << std::endl;
 
-    std::cout << "\n==================================================\n";
-        std::cout << "\n 0. Выход в меню";
-        std::cout << "Чтобы купить улучшение напишите ниже номер улучшения: " << std::endl;
-        std::cin >> action;
+    std::cout << "7. Виртуальная реальность       — [200 иссл.]" << std::endl;
+    std::cout << "   Эффект: Настроение не падает ниже 40 единиц" << std::endl;
+    std::cout << "8. Автоматизированная медицина  — [250 иссл.]" << std::endl;
+    std::cout << "   Эффект: Защита населения от гибели в событиях" << std::endl;
 
-        while (action < 0 || action > 10) {
-            std::cout << "Введите число 0-10: " << std::endl;
-            std::cin >> action;
-        }
+    // --- УРОВЕНЬ IV ---
+    std::cout << "\n";
+    if (magazv4 == false) std::cout << "--- УРОВЕНЬ IV (Закрыто) ---" << std::endl;
+    else std::cout << "--- УРОВЕНЬ IV (Открыто) ---" << std::endl;
 
-        if (action == 1 && isTech1) {
-    if (spaceColony.getResearch() >= 30) {
+    std::cout << "9. Межпланетная торговля        — [400 иссл.]" << std::endl;
+    std::cout << "   Эффект: Разблокирует обмен Исследований на Энергию" << std::endl;
+    std::cout << "10. Пропаганда «Путь домой»     — [600 иссл.]" << std::endl;
+    std::cout << "    Эффект: Ускорение добычи ресурсов" << std::endl;
+
+    std::cout << "\n0. Вернуться в меню" << std::endl;
+    std::cout << "Выберите номер технологии для изучения: ";
+    std::cin >> choice;
+
+    if (choice == 0) return;
+
+    // Логика покупки
+    if (choice == 1 && spaceColony.getResearch() >= 30) {
         spaceColony.addR(-30);
-        hasProtocol = true;
-        isTech1 = false;
-        std::cout << "[Успех] Протокол «Общий сбор» изучен!" << std::endl;
-    } else std::cout << "Недостаточно исследований (нужно 30)!" << std::endl;
-}
-else if (action == 2 && isTech2) {
-    if (spaceColony.getResearch() >= 45) {
+        spaceColony.addM(5);
+        std::cout << "[УСПЕХ] Протокол активирован!" << std::endl;
+    }
+    else if (choice == 2 && spaceColony.getResearch() >= 45) {
         spaceColony.addR(-45);
-        hasRationing = true;
-        isTech2 = false;
-        std::cout << "[Успех] Система рационирования изучена!" << std::endl;
-    } else std::cout << "Недостаточно исследований (нужно 45)!" << std::endl;
-}
-else if (action == 3 && isTech3) {
-    if (spaceColony.getResearch() >= 50) {
+        spaceColony.setRationing(true);
+        std::cout << "[УСПЕХ] Система рационирования введена в эксплуатацию." << std::endl;
+    }
+    else if (choice == 3 && spaceColony.getResearch() >= 50) {
         spaceColony.addR(-50);
-        hasAudioDiaries = true;
-        isTech3 = false;
-        std::cout << "[Успех] Персональные аудио-дневники изучены!" << std::endl;
-    } else std::cout << "Недостаточно исследований (нужно 50)!" << std::endl;
-}
-else if (action == 4 && isTech4 && magazv2) {
-    if (spaceColony.getResearch() >= 80) {
+        spaceColony.setAudioDiaries(true);
+        std::cout << "[УСПЕХ] Теперь колонисты делятся мыслями через аудио-дневники." << std::endl;
+    }
+    else if (choice == 4 && magazv2 && spaceColony.getResearch() >= 80) {
         spaceColony.addR(-80);
-        hasFeast = true;
-        isTech4 = false;
-        std::cout << "[Успех] Организация Пира открыта!" << std::endl;
-    } else std::cout << "Ошибка: Недостаточно очков или закрыт Ур. II!" << std::endl;
-}
-else if (action == 5 && isTech5 && magazv2) {
-    if (spaceColony.getResearch() >= 100) {
-        spaceColony.addR(-100);
-        hasSports = true;
-        isTech5 = false;
-        std::cout << "[Успех] Спортивные трансляции активированы!" << std::endl;
-    } else std::cout << "Ошибка: Недостаточно очков или закрыт Ур. II!" << std::endl;
-}
-else if (action == 6 && isTech6 && magazv2) {
-    if (spaceColony.getResearch() >= 120) {
-        spaceColony.addR(-120);
-        hasNightShift = true;
-        isTech6 = false;
-        std::cout << "[Успех] Ночная смена введена!" << std::endl;
-    } else std::cout << "Ошибка: Недостаточно очков или закрыт Ур. II!" << std::endl;
-}
-else if (action == 7 && isTech7 && magazv3) {
-    if (spaceColony.getResearch() >= 200) {
+        // Этот флаг разблокирует кнопку 4 в главном меню
+        std::cout << "[УСПЕХ] Теперь вы можете устраивать праздники через главное меню!" << std::endl;
+    }
+    else if (choice == 7 && magazv3 && spaceColony.getResearch() >= 200) {
         spaceColony.addR(-200);
-        hasVR = true;
-        isTech7 = false;
-        std::cout << "[Успех] Виртуальная реальность запущена!" << std::endl;
-    } else std::cout << "Ошибка: Недостаточно очков или закрыт Ур. III!" << std::endl;
-}
-else if (action == 8 && isTech8 && magazv3) {
-    if (spaceColony.getResearch() >= 250) {
+        spaceColony.setVR(true);
+        std::cout << "[УСПЕХ] Установлены серверы виртуальной реальности." << std::endl;
+    }
+    else if (choice == 8 && magazv3 && spaceColony.getResearch() >= 250) {
         spaceColony.addR(-250);
-        hasAutoMed = true;
-        isTech8 = false;
-        std::cout << "[Успех] Автоматизированная медицина внедрена!" << std::endl;
-    } else std::cout << "Ошибка: Недостаточно очков или закрыт Ур. III!" << std::endl;
-}
-else if (action == 9 && isTech9 && magazv4) {
-    if (spaceColony.getResearch() >= 400) {
+        spaceColony.setAutoMed(true);
+        std::cout << "[УСПЕХ] Медицинские нано-боты запущены в систему вентиляции." << std::endl;
+    }
+    else if (choice == 9 && magazv4 && spaceColony.getResearch() >= 400) {
         spaceColony.addR(-400);
-        hasTrading = true;
-        isTech9 = false;
-        std::cout << "[Успех] Межпланетная торговля доступна!" << std::endl;
-    } else std::cout << "Ошибка: Недостаточно очков или закрыт Ур. IV!" << std::endl;
-}
-else if (action == 10 && isTech10 && magazv4) {
-    if (spaceColony.getResearch() >= 600) {
+        spaceColony.setTrade(true);
+        std::cout << "[УСПЕХ] Установлена связь с торговыми флотами (Пункт 7 в меню)." << std::endl;
+    }
+    else if (choice == 10 && magazv4 && spaceColony.getResearch() >= 600) {
         spaceColony.addR(-600);
-        hasPropaganda = true;
-        isTech10 = false;
-        std::cout << "[Успех] Пропаганда «Путь домой» запущена!" << std::endl;
-    } else std::cout << "Ошибка: Недостаточно очков или закрыт Ур. IV!" << std::endl;
-}
-else {
-    std::cout << "Некорректный выбор или технология уже изучена!" << std::endl;
-}
+        spaceColony.setPropaganda(true);
+        std::cout << "[УСПЕХ] Пропаганда запущена: вера в возвращение домой увеличила производительность труда на 30%!" << std::endl;
+    }
+    else {
+        std::cout << "[ОШИБКА] Недостаточно исследований или уровень (Tier) еще заблокирован!" << std::endl;
+    }
 }
 
 #include "SpaceColony.h"
