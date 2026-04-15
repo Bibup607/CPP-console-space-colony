@@ -27,7 +27,35 @@ private:
     bool isWin = false;
     std::vector<myBuilding> buildings;
 
+    // Пассивные флаги
+    bool hasRationing = false;     // Система рационирования
+    bool hasAudioDiaries = false;  // Аудио-дневники
+    bool hasVR = false;            // Виртуальная реальность
+    bool hasAutoMed = false;       // Авто-медицина
+    bool hasTrade = false;         // Межпланетная торговля
+    bool hasPropaganda = false;
+
 public:
+
+    void setPropaganda(bool v) { hasPropaganda = v; }
+    bool getPropaganda() { return hasPropaganda; }
+
+    void setRationing(bool v) { hasRationing = v; }
+    bool getRationing() { return hasRationing; }
+
+    void setAudioDiaries(bool v) { hasAudioDiaries = v; }
+    bool getAudioDiaries() { return hasAudioDiaries; }
+
+    void setVR(bool v) { hasVR = v; }
+    bool getVR() { return hasVR; }
+
+    void setAutoMed(bool v) { hasAutoMed = v; }
+    bool getAutoMed() { return hasAutoMed; }
+
+    void setTrade(bool v) { hasTrade = v; }
+    bool getTrade() { return hasTrade; }
+
+
     int getEnergy() { return energy; }
     int getResearch() { return research; }
     bool getIsAlive() { return isAlive && !isWin; }
@@ -49,6 +77,10 @@ public:
     void addM(int v) { mood += v; if (mood > MAX_MOOD) mood = MAX_MOOD; }
     void addN(std::string v) { name = v; }
 
+    void addLVL(int v) { lvl += v; if (lvl < 1) lvl = 1; }
+
+    void setMood(int value) { mood = value; }
+
     const std::vector<myBuilding>& getBuildings() { return buildings; }
 
     void addBuilding(std::string Nameb) {
@@ -61,9 +93,11 @@ public:
     void loadGame();
     void deleteSave();
     void stopGame() { isAlive = false; }
+    void riotSystem();
+    void gameRules();
 };
 
-extern SpaceColony spaceColony; // Глобальный объект для всех файлов
+extern SpaceColony spaceColony;
 
 
 #endif //___SPACECOLONY_H
